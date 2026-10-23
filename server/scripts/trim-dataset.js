@@ -1,4 +1,4 @@
-// ДЛЯ ВИКЛАДАЧА. Обрізає повний датасет Inside Airbnb до невеликого навчального набору.
+// Обрізає повний датасет Inside Airbnb до невеликого навчального набору.
 //
 // 1. Скачай з https://insideairbnb.com/get-the-data/ (Barcelona):
 //    listings.csv.gz (detailed), reviews.csv.gz (detailed), calendar.csv.gz

@@ -11,3 +11,75 @@ datasource db {
 }
 
 // TODO (заняття 1): моделі Host, Listing, Review, CalendarDay
+
+model Host {
+  id          Int     @id @default(autoincrement())
+  airbnbId    String  @unique
+  name        String
+  pictureUrl  String?
+  isSuperhost Boolean  @default(false)
+  since       DateTime? @db.Date
+  listings    Listing[]
+
+  @@map("hosts")
+}
+
+model Listing {
+  id            Int     @id @default(autoincrement())
+  airbnbId      String  @unique
+  name          String
+  description   String?
+  pictureUrl    String?
+  neighbourhood String?
+  neighbourhoodGroup String?
+  latitude      Float
+  longitude     Float
+  propertyType   String
+  roomType      String
+  accommodates  Int
+  bathroomsText String
+  bedrooms      Int?
+  beds          Int?
+  amenities     String[]
+  price         Decimal? @db.Decimal(10, 2)
+  minimumNights Int      @default(1)
+  rating        Float? 
+  reviewsCount  Int      @default(0)
+  hostId        Int
+  hosts         Host @relation(fields: [hostId], references: [id], onDelete: Cascade)
+  reviews       Review[]
+  calendar      CalendarDay[]   
+
+
+  @@index([neighbourhoodGroup])
+  @@index([price])
+  @@index([rating])
+  @@map("listings")
+}
+
+model Review {
+  id            Int     @id @default(autoincrement())
+  airbnbId      String  @unique
+  date          DateTime @db.Date
+  reviewerName  String
+  comments      String?
+
+  listingId     Int
+  listing       Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@index([listingId, date])
+  @@map("reviews")
+}
+
+
+model CalendarDay {
+  date          DateTime  @db.Date
+  available     Boolean 
+  price         Decimal? @db.Decimal(10, 2)
+
+  listingId     Int
+  listing       Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@id([listingId, date])
+  @@map("calendar_days")
+}
