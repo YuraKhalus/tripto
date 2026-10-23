@@ -1,0 +1,51 @@
+# Tripto — локальна інфраструктура для розробки.
+# Запуск усього:          docker compose up
+# Лише база:              docker compose up -d db
+# Команда в контейнері:   docker compose exec api <команда>
+
+services:
+  # ---------- База даних ----------
+  db:
+    image: postgres:17
+    container_name: tripto-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-tripto}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-tripto}
+      POSTGRES_DB: ${POSTGRES_DB:-tripto}
+    ports:
+      # "порт_на_твоєму_компі:порт_у_контейнері"
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      # Дані бази переживають перезапуск і видалення контейнера
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-tripto} -d ${POSTGRES_DB:-tripto}"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  # ---------- Бекенд (Express + Prisma) ----------
+  api:
+    build: ./server
+    container_name: tripto-api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      # Усередині мережі Docker хост бази називається "db", а не "localhost"
+      DATABASE_URL: postgresql://${POSTGRES_USER:-tripto}:${POSTGRES_PASSWORD:-tripto}@db:5432/${POSTGRES_DB:-tripto}
+    ports:
+      - "${API_PORT:-3000}:3000"
+    volumes:
+      # Твій код монтується в контейнер, тож зміни видно одразу
+      - ./server:/app
+      # node_modules лишаються з образу, а не з твого комп'ютера
+      - /app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+    command: npm run dev
+
+volumes:
+  pgdata:

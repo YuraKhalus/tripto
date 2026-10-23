@@ -1,0 +1,8 @@
+node_modules/
+.env
+coverage/
+dist/
+.DS_Store
+*.log
+# повні датасети Inside Airbnb не комітимо — лише обрізані CSV у server/prisma/data
+raw-data/

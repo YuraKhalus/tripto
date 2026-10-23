@@ -1,0 +1,13 @@
+// Схема бази даних Tripto.
+// Після кожної зміни:  docker compose exec api npx prisma migrate dev --name <що_змінили>
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// TODO (заняття 1): моделі Host, Listing, Review, CalendarDay

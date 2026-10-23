@@ -1,0 +1,32 @@
+{
+  "name": "tripto-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Tripto API — Express + Prisma + PostgreSQL",
+  "scripts": {
+    "dev": "nodemon --legacy-watch src/server.js",
+    "start": "node src/server.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "prisma db seed",
+    "db:reset": "prisma migrate reset --force",
+    "db:studio": "prisma studio --port 5555 --browser none"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
+  "dependencies": {
+    "@prisma/client": "6.19.3",
+    "csv-parse": "^7.0.3",
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "csv-stringify": "^6.9.0",
+    "nodemon": "^3.1.14",
+    "prisma": "6.19.3",
+    "supertest": "^7.3.1",
+    "vitest": "^5.0.5"
+  }
+}
