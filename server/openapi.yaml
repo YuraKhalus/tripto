@@ -1,0 +1,255 @@
+# Контракт Tripto API у форматі OpenAPI 3.
+# Swagger UI читає цей файл і малює з нього документацію: http://localhost:3000/api/docs
+# Правило те саме, що й для docs/API.md: спочатку описуємо ендпоінт тут, потім пишемо код.
+
+openapi: 3.0.3
+info:
+  title: Tripto API
+  version: 0.1.0
+  description: |
+    Навчальний аналог Booking.com. Дані — Inside Airbnb, Барселона (CC BY 4.0).
+
+    Успішна відповідь має поле `data` (і `meta` для списків), помилка — поле `error`.
+
+servers:
+  - url: /api
+
+tags:
+  - name: system
+    description: Службові ендпоінти
+  - name: listings
+    description: Оголошення (житло)
+
+paths:
+  /health:
+    get:
+      tags: [system]
+      summary: Перевірка, що сервер живий
+      responses:
+        '200':
+          description: Сервер працює
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+
+  /listings:
+    get:
+      tags: [listings]
+      summary: Список оголошень з пагінацією
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Сторінка оголошень
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListingCard'
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+
+  /listings/{id}:
+    get:
+      tags: [listings]
+      summary: Повна інформація про житло разом із хостом
+      parameters:
+        - $ref: '#/components/parameters/ListingId'
+      responses:
+        '200':
+          description: Житло знайдено
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/ListingDetails'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+# Спільні шматки, на які посилаємось через $ref, щоб не повторювати їх у кожному ендпоінті
+components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: Номер сторінки. Невалідне значення → 1
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    Limit:
+      name: limit
+      in: query
+      description: Скільки записів на сторінці. Більше за 100 → 100
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    ListingId:
+      name: id
+      in: path
+      required: true
+      description: Внутрішній id житла (не airbnbId)
+      schema:
+        type: integer
+        minimum: 1
+        example: 1
+
+  responses:
+    BadRequest:
+      description: Невалідні вхідні дані
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Invalid listing id
+    NotFound:
+      description: Ресурс не знайдено
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: Listing not found
+
+  schemas:
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+
+    Meta:
+      type: object
+      properties:
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 20
+        total:
+          type: integer
+          example: 200
+        totalPages:
+          type: integer
+          example: 10
+
+    ListingCard:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Cozy apartaments Plaza España, 3 b
+        pictureUrl:
+          type: string
+          nullable: true
+        neighbourhood:
+          type: string
+          nullable: true
+          example: la Nova Esquerra de l'Eixample
+        roomType:
+          type: string
+          example: Entire home/apt
+        accommodates:
+          type: integer
+          example: 5
+        price:
+          type: number
+          nullable: true
+          description: Ціна за ніч. У базі Decimal, мапер перетворює на число
+          example: 335
+        rating:
+          type: number
+          nullable: true
+          example: 4.73
+        reviewsCount:
+          type: integer
+          example: 3111
+        location:
+          type: object
+          properties:
+            lat:
+              type: number
+              example: 41.37953
+            lng:
+              type: number
+              example: 2.1466
+
+    Host:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 7
+        name:
+          type: string
+          example: Marta
+        pictureUrl:
+          type: string
+          nullable: true
+        isSuperhost:
+          type: boolean
+        since:
+          type: string
+          format: date
+          nullable: true
+
+    # Повна картка = коротка картка + додаткові поля (allOf «склеює» схеми)
+    ListingDetails:
+      allOf:
+        - $ref: '#/components/schemas/ListingCard'
+        - type: object
+          properties:
+            description:
+              type: string
+              nullable: true
+            neighbourhoodGroup:
+              type: string
+              nullable: true
+              example: Eixample
+            propertyType:
+              type: string
+              example: Entire rental unit
+            bathroomsText:
+              type: string
+              nullable: true
+              example: 1 bath
+            bedrooms:
+              type: integer
+              nullable: true
+              example: 2
+            beds:
+              type: integer
+              nullable: true
+              example: 3
+            amenities:
+              type: array
+              items:
+                type: string
+              example: [Wifi, Kitchen]
+            minimumNights:
+              type: integer
+              example: 2
+            host:
+              $ref: '#/components/schemas/Host'

@@ -46,7 +46,7 @@ model Listing {
   rating        Float? 
   reviewsCount  Int      @default(0)
   hostId        Int
-  hosts         Host @relation(fields: [hostId], references: [id], onDelete: Cascade)
+  host          Host @relation(fields: [hostId], references: [id], onDelete: Cascade)
   reviews       Review[]
   calendar      CalendarDay[]   
 

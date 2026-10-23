@@ -48,6 +48,8 @@ docker compose exec api npx prisma db seed       # наповнити даним
 
 Перевірка: <http://localhost:3000/api/health> та <http://localhost:3000/api/listings>
 
+Документація API (Swagger UI): <http://localhost:3000/api/docs>
+
 Для автодоповнення в редакторі також виконай `npm install` у папці `server` на своєму комп'ютері.
 
 ## Щоденні команди

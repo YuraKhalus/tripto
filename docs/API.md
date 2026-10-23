@@ -1,6 +1,8 @@
 # Tripto API — контракт
 
 Базовий URL: `http://localhost:3000/api`
+Інтерактивна документація (Swagger UI): `http://localhost:3000/api/docs`. Її джерело — `server/openapi.yaml`.
+Змінюєш чи додаєш ендпоінт — оновлюй і цей файл, і `openapi.yaml` в одному PR.
 Формат: JSON. Успішна відповідь має поле `data`, помилка — поле `error`.
 
 ```json
