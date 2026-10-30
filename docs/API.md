@@ -117,3 +117,44 @@
 - **Обране** — `POST /listings/:id/save`, `DELETE /listings/:id/save`
 - **Відгуки користувача** — `POST /listings/:id/reviews`
 - **Календар** — `GET /listings/:id/availability?from=YYYY-MM-DD&to=YYYY-MM-DD`: `from` і `to` обов'язкові, `to` ≥ `from`, період до 90 днів; відповідь `[{ "date", "available", "price" }]`
+
+---
+
+### `GET /listings/top-rated`
+Список оголошень з високим рейтингом і великою кількістю коментарів
+
+| Query | Тип | За замовчуванням | Обмеження |
+|-------|-----|------------------|-----------|
+| `limit` | int | 10 | 1–50 |
+
+#### 200
+
+```json
+{
+  "data": {
+     "id": 118,
+      "name": "Mediterranean Barcelona Apartments, Penthouse A...",
+      "pictureUrl": "https://a0.muscache.com/pictures/hosting/Hosting-42396146/original/847c3baf-55ba-4df9-b1a3-779242c96cd8.jpeg",
+      "neighbourhood": "Porta",
+      "roomType": "Entire home/apt",
+      "accommodates": 4,
+      "price": 189,
+      "rating": 5,
+      "reviewsCount": 50,
+      "location": {
+        "lat": 41.4305114746094,
+        "lng": 2.17860698699951
+      }
+  }
+}
+```
+
+#### 400
+
+```json
+{
+  'error': "Invalid limit"
+}
+```
+
+---
