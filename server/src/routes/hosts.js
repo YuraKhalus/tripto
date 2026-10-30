@@ -22,14 +22,14 @@ hostsRouter.get("/:id/listings", async (req, res) => {
         return res.status(404).json({ error: "Host not found" });
     }
 
-    //console.log(host);
+    console.log(host);
 
     const { page, limit, skip, take } = parsePagination(req.query);
 
     const [listings, total] = await Promise.all([
         prisma.listing.findMany({
             select: cardSelect,
-            orderBy: { id: "asc" },
+            orderBy: { hostId: "asc" },
             skip,
             take,
         }),
@@ -37,7 +37,7 @@ hostsRouter.get("/:id/listings", async (req, res) => {
     ]);
 
     res.json({
-        data: host.listings.map(toListingDetails),
+        data: listings.map(toListingDetails),
         meta: buildMeta({ page, limit, total }),
     });
 });
