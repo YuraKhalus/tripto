@@ -19,6 +19,8 @@ tags:
     description: Службові ендпоінти
   - name: listings
     description: Оголошення (житло)
+  - name: hosts
+    description: Господарі
 
 paths:
   /health:
@@ -80,6 +82,27 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  /hosts/{id}:
+    get:
+      tags: [hosts]
+      summary: Інформація про господаря з кількістю оголошень
+      parameters:
+        - $ref: '#/components/parameters/HostId'
+      responses:
+        '200':
+          description: Господар знайдено
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/HostDetails'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
 # Спільні шматки, на які посилаємось через $ref, щоб не повторювати їх у кожному ендпоінті
 components:
   parameters:
@@ -109,6 +132,15 @@ components:
         type: integer
         minimum: 1
         example: 1
+    HostId:
+      name: id
+      in: path
+      required: true
+      description: Внутрішній id господаря (не airbnbId)
+      schema:
+        type: integer
+        minimum: 1
+        example: 7
 
   responses:
     BadRequest:
@@ -214,6 +246,31 @@ components:
           type: string
           format: date
           nullable: true
+
+    HostDetails:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 7
+        airbnbId:
+          type: string
+          example: "12345678"
+        name:
+          type: string
+          example: Marta
+        pictureUrl:
+          type: string
+          nullable: true
+        isSuperhost:
+          type: boolean
+        since:
+          type: string
+          format: date
+          nullable: true
+        listingsCount:
+          type: integer
+          example: 5
 
     # Повна картка = коротка картка + додаткові поля (allOf «склеює» схеми)
     ListingDetails:
