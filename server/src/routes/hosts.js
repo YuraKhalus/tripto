@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { prisma } from "../db.js";
 import { toListingDetails } from "../mappers/listing.js";
-import { parsePagination } from "../utils/pagination.js";
+import { buildMeta, parsePagination } from "../utils/pagination.js";
 import { cardSelect } from "./listings.js";
 //import { listingsRouter } from "./listings";
 
@@ -36,5 +36,8 @@ hostsRouter.get("/:id/listings", async (req, res) => {
         prisma.listing.count(),
     ]);
 
-    res.json({ data: host.listings });
+    res.json({
+        data: host.listings.map(toListingDetails),
+        meta: buildMeta({ page, limit, total }),
+    });
 });
