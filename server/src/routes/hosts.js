@@ -33,7 +33,9 @@ hostsRouter.get("/:id/listings", async (req, res) => {
             skip,
             take,
         }),
-        prisma.listing.count(),
+        prisma.listing.count({
+            where: { hostId: id },
+        }),
     ]);
 
     res.json({
