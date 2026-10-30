@@ -28,8 +28,9 @@ hostsRouter.get("/:id/listings", async (req, res) => {
 
     const [listings, total] = await Promise.all([
         prisma.listing.findMany({
+            where: { hostId: id },
             select: cardSelect,
-            orderBy: { hostId: "asc" },
+            orderBy: { id: "asc" },
             skip,
             take,
         }),
@@ -37,6 +38,7 @@ hostsRouter.get("/:id/listings", async (req, res) => {
     ]);
 
     res.json({
+        host: host,
         data: listings.map(toListingDetails),
         meta: buildMeta({ page, limit, total }),
     });
