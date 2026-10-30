@@ -1,5 +1,8 @@
 import { Router } from "express";
 import { prisma } from "../db.js";
+import { toListingDetails } from "../mappers/listing.js";
+import { parsePagination } from "../utils/pagination.js";
+import { cardSelect } from "./listings.js";
 //import { listingsRouter } from "./listings";
 
 export const hostsRouter = Router();
@@ -10,16 +13,28 @@ hostsRouter.get("/:id/listings", async (req, res) => {
         return res.status(400).json({ error: "Invalid host id" });
     }
 
-    const hostListings = await prisma.host.findUnique({
+    const host = await prisma.host.findUnique({
         where: { id },
         include: { listings: true },
     });
 
-    if (!hostListings) {
+    if (!host) {
         return res.status(404).json({ error: "Host not found" });
     }
 
-    console.log(hostListings);
+    //console.log(host);
 
-    res.json({ data: hostListings });
+    const { page, limit, skip, take } = parsePagination(req.query);
+
+    const [listings, total] = await Promise.all([
+        prisma.listing.findMany({
+            select: cardSelect,
+            orderBy: { id: "asc" },
+            skip,
+            take,
+        }),
+        prisma.listing.count(),
+    ]);
+
+    res.json({ data: host.listings });
 });
