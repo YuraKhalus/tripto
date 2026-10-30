@@ -3,7 +3,6 @@ import { prisma } from "../db.js";
 import { toListingDetails } from "../mappers/listing.js";
 import { buildMeta, parsePagination } from "../utils/pagination.js";
 import { cardSelect } from "./listings.js";
-//import { listingsRouter } from "./listings";
 
 export const hostsRouter = Router();
 
@@ -38,7 +37,6 @@ hostsRouter.get("/:id/listings", async (req, res) => {
     ]);
 
     res.json({
-        host: host,
         data: listings.map(toListingDetails),
         meta: buildMeta({ page, limit, total }),
     });
