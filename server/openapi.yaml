@@ -59,6 +59,34 @@ paths:
                   meta:
                     $ref: '#/components/schemas/Meta'
 
+  /listings/top-rated:
+    get:
+    tags: [listings]
+    summary: список оголошень з високим рейтингом і великою кількістю коментарів
+    parameters:
+      - $: '#/components/parameters/Limit'
+    responses:
+      '200':
+        description: Сторінка оголошень з високим рейтингом
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ListingDetails'
+      '400':
+        description: Сторінка оголошень з високим рейтингом
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/responses/BadRequest'
+
   /listings/{id}:
     get:
       tags: [listings]
