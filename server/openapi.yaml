@@ -80,6 +80,53 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  /hosts/{id}/listings:
+    get:
+      summary: Отримати списки оголошень конкретного хоста
+      tags:
+        - Hosts
+      parameters:
+        - $ref: '#/components/parameters/HostId'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Успішна відповідь зі списком оголошень та пагінацією
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListingCard'
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                required:
+                  - data
+                  - meta
+        '400':
+          description: Невалідний ID хоста
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid host id"
+        '404':
+          description: Хост не знайдено
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Host not found"
+
 # Спільні шматки, на які посилаємось через $ref, щоб не повторювати їх у кожному ендпоінті
 components:
   parameters:
@@ -105,6 +152,16 @@ components:
       in: path
       required: true
       description: Внутрішній id житла (не airbnbId)
+      schema:
+        type: integer
+        minimum: 1
+        example: 1
+
+    HostId:
+      name: id
+      in: path
+      required: true
+      description: Внутрішній id хоста
       schema:
         type: integer
         minimum: 1
