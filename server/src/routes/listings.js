@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { prisma } from '../db.js';
 import { parsePagination, buildMeta } from '../utils/pagination.js';
 import { toListingCard, toListingDetails } from '../mappers/listing.js';
+import { toReview } from '../mappers/review.js';
 
 export const listingsRouter = Router();
 
@@ -51,3 +52,29 @@ listingsRouter.get('/:id', async (req, res) => {
 
   res.json({ data: toListingDetails(listing) });
 });
+
+
+listingsRouter.get('/:id/reviews', async (req, res) => {
+  const id = Number(req.params.id);
+  if(!Number.isInteger(id) || id < 1){
+    return res.status(400).json({ error: 'Invalid listing id'});
+  }
+
+  const listing = await prisma.listing.findUnique({ where: { id }, select: { id: true } });
+
+  if(listing === null) {
+    return res.status(404).json({ error: 'Listing not found' });
+  }
+
+  const { page, limit, skip, take } = parsePagination(req.query);
+  const [reviews, total] = await Promise.all([
+    prisma.review.findMany({
+      where: { listingId: id },
+      orderBy: [{ date: 'desc'}, { id: 'desc' }],
+      skip, take
+    }),
+    prisma.review.count({ where: { listingId: id }})
+  ])
+
+  res.json({ data: reviews.map(toReview), meta: buildMeta({ page, limit, total }) });
+})
