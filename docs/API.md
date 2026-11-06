@@ -114,21 +114,21 @@
 ```json
 {
   "data": [
-      {
-        "id": 35,
-        "name": "Modern & Cozy Apartment in Gràcia",
-        "pictureUrl": "https://a0.muscache.com/pictures/25784927/5d0fab91_original.jpg",
-        "neighbourhood": "la Vila de Gràcia",
-        "roomType": "Entire home/apt",
-        "accommodates": 2,
-        "price": 155,
-        "rating": 4.74,
-        "reviewsCount": 953,
-        "location": {
-            "lat": 41.40638,
-            "lng": 2.15709
-        }
+    {
+      "id": 1,
+      "name": "Cozy apartaments Plaza España, 3 bedrooms",
+      "pictureUrl": "https://a0.muscache.com/pictures/miso/Hosting-846093318788581404/original/d5cf8e54-a36d-4d1f-9240-d858df276b3c.jpeg",
+      "neighbourhood": "la Nova Esquerra de l'Eixample",
+      "roomType": "Entire home/apt",
+      "accommodates": 5,
+      "price": 335,
+      "rating": 4.73,
+      "reviewsCount": 3111,
+      "location": {
+        "lat": 41.37953,
+        "lng": 2.1466
       }
+    }
   ],
     "meta": {
         "page": 1,
