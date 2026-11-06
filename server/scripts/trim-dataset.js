@@ -22,6 +22,8 @@ const REVIEWS_PER_LISTING = 20;
 const CALENDAR_DAYS = 180;
 const OUT_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', 'prisma', 'data');
 
+// Колонки згруповані за змістом (житло, хост, район...), тож Prettier не розтягує їх по одній на рядок
+// prettier-ignore
 const LISTING_COLUMNS = [
   'id', 'name', 'description', 'picture_url',
   'host_id', 'host_name', 'host_since', 'host_is_superhost', 'host_picture_url',

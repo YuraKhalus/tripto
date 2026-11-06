@@ -50,5 +50,9 @@ export function parseDateOrNull(value) {
 /** "Line 1<br /><br />Line 2" -> "Line 1\n\nLine 2" (Inside Airbnb зберігає переноси як HTML) */
 export function htmlBreaksToNewlines(value) {
   if (!value) return null;
-  return String(value).replace(/<br\s*\/?>/gi, '\n').trim() || null;
+  return (
+    String(value)
+      .replace(/<br\s*\/?>/gi, '\n')
+      .trim() || null
+  );
 }
