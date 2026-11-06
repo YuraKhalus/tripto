@@ -19,6 +19,8 @@ tags:
     description: Службові ендпоінти
   - name: listings
     description: Оголошення (житло)
+  - name: hosts
+    description: Господарі
 
 paths:
   /health:
@@ -84,7 +86,7 @@ paths:
     get:
       summary: Отримати списки оголошень конкретного хоста
       tags:
-        - Hosts
+        - hosts
       parameters:
         - $ref: '#/components/parameters/HostId'
         - $ref: '#/components/parameters/Page'
@@ -107,25 +109,9 @@ paths:
                   - data
                   - meta
         '400':
-          description: Невалідний ID хоста
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Invalid host id"
+          $ref: '#/components/responses/BadRequest'
         '404':
-          description: Хост не знайдено
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Host not found"
+          $ref: '#/components/responses/NotFound'
 
 # Спільні шматки, на які посилаємось через $ref, щоб не повторювати їх у кожному ендпоінті
 components:

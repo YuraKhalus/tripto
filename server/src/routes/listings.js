@@ -1,24 +1,9 @@
 import { Router } from "express";
 import { prisma } from "../db.js";
 import { parsePagination, buildMeta } from "../utils/pagination.js";
-import { toListingCard, toListingDetails } from "../mappers/listing.js";
+import { cardSelect, toListingCard, toListingDetails } from "../mappers/listing.js";
 
 export const listingsRouter = Router();
-
-// Поля, потрібні для картки. Беремо лише їх, а не весь рядок (опис може бути довгим)
-export const cardSelect = {
-    id: true,
-    name: true,
-    pictureUrl: true,
-    neighbourhood: true,
-    roomType: true,
-    accommodates: true,
-    price: true,
-    rating: true,
-    reviewsCount: true,
-    latitude: true,
-    longitude: true,
-};
 
 // GET /api/listings?page=1&limit=20
 listingsRouter.get("/", async (req, res) => {

@@ -51,7 +51,19 @@ describe('GET /hosts/:id/listings', () => {
 
     expect(res.status).toBe(200);
     expect(res.body.meta).toEqual({ page: 1, limit: 10, total: 5, totalPages: 1 });
-    expect(res.body.data.length).toBe(1);
+    
+    expect(res.body.data).toEqual([{
+      id: 10,
+      name: 'Cozy apartment in Eixample',
+      pictureUrl: 'https://example.com/host-listing.jpg',
+      neighbourhood: 'Eixample',
+      roomType: 'Entire home/apt',
+      accommodates: 2,
+      price: 95,
+      rating: 4.9,
+      reviewsCount: 30,
+      location: { lat: 41.38, lng: 2.17 },
+    }]);
     
     expect(prisma.listing.findMany).toHaveBeenCalledWith(
       expect.objectContaining({ 
