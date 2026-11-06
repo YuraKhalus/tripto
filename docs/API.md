@@ -109,7 +109,7 @@
 ### `GET /hosts/:id/listings`
 
 Усі житла господаря з пагінацією, у тому самому форматі карток, що й `/listings`.
-Помилки: `400`, `{ error: "Invalid host id" }`, якщо `id` не ціле додатне число, `404`, `{ "error": "Host not found" }`, якщо господаря немає.
+Помилки: `400`, `{ "error": "Invalid host id" }`, якщо `id` не ціле додатне число, `404`, `{ "error": "Host not found" }`, якщо господаря немає.
 
 ```json
 {
@@ -130,12 +130,12 @@
       }
     }
   ],
-    "meta": {
-        "page": 1,
-        "limit": 20,
-        "total": 5,
-        "totalPages": 1
-    }
+  "meta": {
+    "page": 1,
+    "limit": 20,
+    "total": 5,
+    "totalPages": 1
+  }
 }
 ```
 
