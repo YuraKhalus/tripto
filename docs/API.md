@@ -113,9 +113,23 @@
 
 ```json
 {
-    "data": [
-        /* ListingCard */
-    ],
+  "data": [
+      {
+        "id": 35,
+        "name": "Modern & Cozy Apartment in Gràcia",
+        "pictureUrl": "https://a0.muscache.com/pictures/25784927/5d0fab91_original.jpg",
+        "neighbourhood": "la Vila de Gràcia",
+        "roomType": "Entire home/apt",
+        "accommodates": 2,
+        "price": 155,
+        "rating": 4.74,
+        "reviewsCount": 953,
+        "location": {
+            "lat": 41.40638,
+            "lng": 2.15709
+        }
+      }
+  ],
     "meta": {
         "page": 1,
         "limit": 20,
