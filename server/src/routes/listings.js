@@ -1,24 +1,9 @@
 import { Router } from 'express';
 import { prisma } from '../db.js';
 import { parsePagination, buildMeta } from '../utils/pagination.js';
-import { toListingCard, toListingDetails } from '../mappers/listing.js';
+import { cardSelect, toListingCard, toListingDetails } from '../mappers/listing.js';
 
 export const listingsRouter = Router();
-
-// Поля, потрібні для картки. Беремо лише їх, а не весь рядок (опис може бути довгим)
-const cardSelect = {
-  id: true,
-  name: true,
-  pictureUrl: true,
-  neighbourhood: true,
-  roomType: true,
-  accommodates: true,
-  price: true,
-  rating: true,
-  reviewsCount: true,
-  latitude: true,
-  longitude: true,
-};
 
 // GET /api/listings?page=1&limit=20
 listingsRouter.get('/', async (req, res) => {
@@ -26,11 +11,19 @@ listingsRouter.get('/', async (req, res) => {
 
   // Два запити паралельно: сторінка даних + загальна кількість
   const [listings, total] = await Promise.all([
-    prisma.listing.findMany({ select: cardSelect, orderBy: { id: 'asc' }, skip, take }),
+    prisma.listing.findMany({
+      select: cardSelect,
+      orderBy: { id: 'asc' },
+      skip,
+      take,
+    }),
     prisma.listing.count(),
   ]);
 
-  res.json({ data: listings.map(toListingCard), meta: buildMeta({ page, limit, total }) });
+  res.json({
+    data: listings.map(toListingCard),
+    meta: buildMeta({ page, limit, total }),
+  });
 });
 
 // GET /api/listings/:id

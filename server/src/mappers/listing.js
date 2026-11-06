@@ -2,6 +2,21 @@
 // Фронту зручніше число, тому перетворюємо тут — в одному місці.
 const toNumber = (decimal) => (decimal === null || decimal === undefined ? null : Number(decimal));
 
+// Поля, потрібні для картки. Беремо лише їх, а не весь рядок (опис може бути довгим)
+export const cardSelect = {
+  id: true,
+  name: true,
+  pictureUrl: true,
+  neighbourhood: true,
+  roomType: true,
+  accommodates: true,
+  price: true,
+  rating: true,
+  reviewsCount: true,
+  latitude: true,
+  longitude: true,
+};
+
 /** Коротка картка для списку (результати пошуку) */
 export function toListingCard(listing) {
   return {
