@@ -94,32 +94,6 @@
 | `GET /hosts/:id/listings` | Максим | «Інше житло господаря» |
 | `GET /neighbourhoods` | Тана | фільтр «Район» на головній |
 
-### `GET /listings/:id/reviews`
-Відгуки до житла, від найновіших (за датою, потім за `id`). Пагінація як у `/listings`.
-Помилки: `400` якщо `id` не ціле додатне число, `404` якщо житла немає.
-Житло є, а відгуків немає → `200` і порожній `data`.
-
-```json
-{
-  "data": [{ "id": 3402, "reviewerName": "Joel", "date": "2026-09-17", "comments": "..." }],
-  "meta": { "page": 1, "limit": 20, "total": 20, "totalPages": 1 }
-}
-```
-
----
-
-## Далі (кожен описує свій модуль)
-
-- **Пошук і фільтри** — `GET /listings?city&checkIn&checkOut&guests&priceMin&priceMax&roomType&sort...`
-- **Авторизація** — `POST /auth/register`, `POST /auth/login`, `GET /auth/me`, OAuth Google/Facebook
-- **Бронювання** — `POST /bookings`, `GET /bookings/:id`, `DELETE /bookings/:id`
-- **Профіль** — `GET /users/me`, `PATCH /users/me`, `GET /users/me/trips`, `GET /users/me/saved`
-- **Обране** — `POST /listings/:id/save`, `DELETE /listings/:id/save`
-- **Відгуки користувача** — `POST /listings/:id/reviews`
-- **Календар** — `GET /listings/:id/availability?from=YYYY-MM-DD&to=YYYY-MM-DD`: `from` і `to` обов'язкові, `to` ≥ `from`, період до 90 днів; відповідь `[{ "date", "available", "price" }]`
-
----
-
 ### `GET /listings/top-rated`
 Найкраще житло для головної: лише з рейтингом і щонайменше 10 відгуками. Сортування: `rating` ↓, `reviewsCount` ↓, `id` ↑. Без пагінації.
 Помилки: `400` `{ "error": "Invalid limit" }`, якщо `limit` не ціле число від 1 до 50.
@@ -157,4 +131,26 @@
 }
 ```
 
+### `GET /listings/:id/reviews`
+Відгуки до житла, від найновіших (за датою, потім за `id`). Пагінація як у `/listings`.
+Помилки: `400` якщо `id` не ціле додатне число, `404` якщо житла немає.
+Житло є, а відгуків немає → `200` і порожній `data`.
+
+```json
+{
+  "data": [{ "id": 3402, "reviewerName": "Joel", "date": "2026-09-17", "comments": "..." }],
+  "meta": { "page": 1, "limit": 20, "total": 20, "totalPages": 1 }
+}
+```
+
 ---
+
+## Далі (кожен описує свій модуль)
+
+- **Пошук і фільтри** — `GET /listings?city&checkIn&checkOut&guests&priceMin&priceMax&roomType&sort...`
+- **Авторизація** — `POST /auth/register`, `POST /auth/login`, `GET /auth/me`, OAuth Google/Facebook
+- **Бронювання** — `POST /bookings`, `GET /bookings/:id`, `DELETE /bookings/:id`
+- **Профіль** — `GET /users/me`, `PATCH /users/me`, `GET /users/me/trips`, `GET /users/me/saved`
+- **Обране** — `POST /listings/:id/save`, `DELETE /listings/:id/save`
+- **Відгуки користувача** — `POST /listings/:id/reviews`
+- **Календар** — `GET /listings/:id/availability?from=YYYY-MM-DD&to=YYYY-MM-DD`: `from` і `to` обов'язкові, `to` ≥ `from`, період до 90 днів; відповідь `[{ "date", "available", "price" }]`
