@@ -59,6 +59,34 @@ paths:
                   meta:
                     $ref: '#/components/schemas/Meta'
 
+  /listings/top-rated:
+    get:
+      tags: [listings]
+      summary: Найкраще житло за рейтингом (для головної)
+      parameters:
+        - name: limit
+          in: query
+          description: Скільки житла повернути. Поза межами 1–50 → 400
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+      responses:
+        '200':
+          description: Список житла, від найвищого рейтингу
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListingCard'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
   /listings/{id}:
     get:
       tags: [listings]

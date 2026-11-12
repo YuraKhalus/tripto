@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { prisma } from '../db.js';
 import { parsePagination, buildMeta } from '../utils/pagination.js';
+import { parseLimit } from '../utils/limit.js';
 import { toListingCard, toListingDetails } from '../mappers/listing.js';
 
 export const listingsRouter = Router();
@@ -33,6 +34,26 @@ listingsRouter.get('/', async (req, res) => {
   res.json({ data: listings.map(toListingCard), meta: buildMeta({ page, limit, total }) });
 });
 
+// GET /api/listings/top-rated?limit=10
+// Стоїть ВИЩЕ за /:id, інакше Express прийме "top-rated" за id і поверне 400
+listingsRouter.get('/top-rated', async (req, res) => {
+  const limit = parseLimit(req.query.limit, {defaultValue: 10, max: 50});
+  
+  if (limit === null) {
+    return res.status(400).json({ error: "Invalid limit" })
+  }
+
+  const listings = await prisma.listing.findMany({
+    where: { rating: { not: null }, reviewsCount: { gte: 10 } },
+    select: cardSelect,
+    orderBy: [{ rating: 'desc' }, { reviewsCount: 'desc' }, { id: 'asc' }],
+    take: limit,
+  });
+
+  res.json({ data: listings.map(toListingCard)});
+})
+
+
 // GET /api/listings/:id
 listingsRouter.get('/:id', async (req, res) => {
   const id = Number(req.params.id);
@@ -51,3 +72,4 @@ listingsRouter.get('/:id', async (req, res) => {
 
   res.json({ data: toListingDetails(listing) });
 });
+
