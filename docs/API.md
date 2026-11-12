@@ -132,21 +132,20 @@
 
 ```json
 {
-  "data": {
-     "id": 118,
+  "data": [
+    {
+      "id": 118,
       "name": "Mediterranean Barcelona Apartments, Penthouse A...",
-      "pictureUrl": "https://a0.muscache.com/pictures/hosting/Hosting-42396146/original/847c3baf-55ba-4df9-b1a3-779242c96cd8.jpeg",
+      "pictureUrl": "https://...",
       "neighbourhood": "Porta",
       "roomType": "Entire home/apt",
       "accommodates": 4,
       "price": 189,
       "rating": 5,
       "reviewsCount": 50,
-      "location": {
-        "lat": 41.4305114746094,
-        "lng": 2.17860698699951
-      }
-  }
+      "location": { "lat": 41.4305, "lng": 2.1786 }
+    }
+  ]
 }
 ```
 
