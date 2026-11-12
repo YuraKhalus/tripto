@@ -39,7 +39,7 @@ listingsRouter.get('/', async (req, res) => {
 listingsRouter.get('/top-rated', async (req, res) => {
   const limit = parseLimit(req.query.limit, {defaultValue: 10, max: 50});
   
-  if (!limit) {
+  if (limit === null) {
     return res.status(400).json({ error: "Invalid limit" })
   }
 
