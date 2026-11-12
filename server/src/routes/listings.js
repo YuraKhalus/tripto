@@ -43,9 +43,13 @@ listingsRouter.get('/top-rated', async (req, res) => {
     return res.status(400).json({ error: "Invalid limit" })
   }
 
-  const [listings] = await Promise.all([
-    prisma.listing.findMany({ select: cardSelect, orderBy:[{rating: 'desc'}, {reviewsCount: 'desc'}, {id: 'asc'}], take: limit })
-  ]);
+  const listings = await prisma.listing.findMany({
+    // 5.0 з одним відгуком — не «найкраще», тому відсікаємо житло з малою кількістю відгуків
+    where: { rating: { not: null }, reviewsCount: { gte: 10 } },
+    select: cardSelect,
+    orderBy: [{ rating: 'desc' }, { reviewsCount: 'desc' }, { id: 'asc' }],
+    take: limit,
+  });
 
   res.json({ data: listings.map(toListingCard)});
 })
