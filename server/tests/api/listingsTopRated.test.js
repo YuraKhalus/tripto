@@ -97,6 +97,8 @@ describe('GET /api/listings/top-rated', () => {
     ['від’ємне число', '-5'],
     ['більше за максимум', '51'],
     ['не число', 'abc'],
+    ['дробове число', '2.5'],
+    ['порожнє значення', ''],
   ])('повертає 400, якщо limit некоректний: %s, і не йде в базу', async (_name, limit) => {
     const res = await request(app).get(`/api/listings/top-rated?limit=${limit}`);
 
