@@ -80,6 +80,18 @@ describe('GET /api/listings/top-rated', () => {
     );
   });
 
+  it('бере в базу лише оголошення з рейтингом і щонайменше 10 відгуками', async () => {
+    prisma.listing.findMany.mockResolvedValue([fakeListing]);
+
+    await request(app).get('/api/listings/top-rated');
+
+    expect(prisma.listing.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: { rating: { not: null }, reviewsCount: { gte: 10 } },
+      }),
+    );
+  });
+
   it.each([
     ['мінімальне значення', 1],
     ['максимальне значення', 50],
