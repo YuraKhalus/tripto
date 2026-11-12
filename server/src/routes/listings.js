@@ -34,6 +34,8 @@ listingsRouter.get('/', async (req, res) => {
   res.json({ data: listings.map(toListingCard), meta: buildMeta({ page, limit, total }) });
 });
 
+// GET /api/listings/top-rated?limit=10
+// Стоїть ВИЩЕ за /:id, інакше Express прийме "top-rated" за id і поверне 400
 listingsRouter.get('/top-rated', async (req, res) => {
   const limit = parseLimit(req.query.limit, {defaultValue: 10, max: 50});
   
