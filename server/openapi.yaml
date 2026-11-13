@@ -82,14 +82,15 @@ paths:
   
   /listings/{id}/reviews:
     get:
-      summary: Відгуки про апартамент з id, зазначеним у запиті
+      tags: [listings]
+      summary: Відгуки до житла, від найновіших
       parameters: 
         - $ref: '#/components/parameters/ListingId'
         - $ref: '#/components/parameters/Page'
         - $ref: '#/components/parameters/Limit'
       responses:
         '200':
-          description: Сторінка оголошень
+          description: Сторінка відгуків
           content:
             application/json:
               schema:
@@ -101,6 +102,10 @@ paths:
                       $ref: '#/components/schemas/Review'
                   meta:
                     $ref: '#/components/schemas/Meta'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
         
 
 # Спільні шматки, на які посилаємось через $ref, щоб не повторювати їх у кожному ендпоінті
@@ -290,7 +295,7 @@ components:
           type: string
           format: date
           description: Дата відгуку у форматі YYYY-MM-DD. У базі DateTime, мапер повертає лише дату
-          example: 2026-10-20
+          example: '2026-10-20'
         comments:
           type: string
           nullable: true
