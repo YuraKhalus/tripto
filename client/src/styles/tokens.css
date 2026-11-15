@@ -1,0 +1,16 @@
+:root{
+    --color-primary-500: #0057ff;
+    --color-primary-hover-600: #0046cc;
+    --color-primary-light-300: #669aff; 
+    --color-primary-soft-50: #e8effc;
+    --color-dark: #454C58;
+
+    --color-text: #2B3037;
+    --color-bg: #ffffff;
+    --color-bg-soft: #f3f7ff;
+
+    --font: 'Roboto', system-ui, sans-serif;
+    --container: 1240px;
+}
+
+
