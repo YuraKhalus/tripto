@@ -1,9 +1,16 @@
 :root{
+    --color-primary-700: #003499;
     --color-primary-500: #0057ff;
     --color-primary-hover-600: #0046cc;
     --color-primary-light-300: #669aff; 
     --color-primary-soft-50: #e8effc;
+    --color-primary-soft-100: #d1dffa;
+
     --color-dark: #454C58;
+    --color-neutral-900: #121316; 
+    --color-purple: #9E20F8;
+    --color-green-600: #049153;
+    --color-amber: #FAC91E;
 
     --color-text: #2B3037;
     --color-bg: #ffffff;
