@@ -106,6 +106,24 @@
 }
 ```
 
+### `GET /hosts/:id`
+Картка господаря.
+Помилки: `400` якщо `id` не ціле додатне число, `404` якщо господаря немає.
+
+```json
+{
+  "data": {
+    "id": 7,
+    "airbnbId": "12345678",
+    "name": "Marta",
+    "pictureUrl": "https://example.com/host.jpg",
+    "isSuperhost": true,
+    "since": "2020-05-15",
+    "listingsCount": 5
+  }
+}
+```
+
 ---
 
 ## Далі (кожен описує свій модуль)

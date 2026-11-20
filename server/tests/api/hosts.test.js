@@ -41,7 +41,7 @@ describe('GET /api/hosts/:id', () => {
       name: 'Marta',
       pictureUrl: 'https://example.com/host.jpg',
       isSuperhost: true,
-      since: fakeHost.since,
+      since: fakeHost.since.toISOString(),
       listingsCount: 5,
     });
     expect(prisma.host.findUnique).toHaveBeenCalledWith(
