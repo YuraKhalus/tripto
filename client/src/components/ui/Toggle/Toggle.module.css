@@ -1,0 +1,121 @@
+.labelWrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    font-family: var(--font);
+    line-height: 1.4;
+    box-sizing: border-box;
+}
+
+/* Visually hidden native input */
+.nativeInput {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Track */
+.track {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--color-border);
+    border-radius: var(--radius-full);
+    transition: background-color var(--transition-normal);
+    box-sizing: border-box;
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* Thumb */
+.thumb {
+    border-radius: var(--radius-full);
+    background-color: var(--color-bg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: transform var(--transition-normal);
+    box-sizing: border-box;
+}
+
+/* Size: MD */
+.size_md .track {
+    width: 44px;
+    height: 24px;
+    padding: 2px;
+}
+
+.size_md .thumb {
+    width: 20px;
+    height: 20px;
+}
+
+.size_md .nativeInput:checked + .track .thumb {
+    transform: translateX(20px);
+}
+
+/* Size: SM */
+.size_sm .track {
+    width: 36px;
+    height: 20px;
+    padding: 2px;
+}
+
+.size_sm .thumb {
+    width: 16px;
+    height: 16px;
+}
+
+.size_sm .nativeInput:checked + .track .thumb {
+    transform: translateX(16px);
+}
+
+/* Checked state */
+.nativeInput:checked + .track {
+    background-color: var(--color-primary);
+}
+
+/* Hover state */
+.labelWrapper:hover:not(.disabled) .nativeInput:not(:checked) + .track {
+    background-color: var(--color-border-hover);
+}
+
+.labelWrapper:hover:not(.disabled) .nativeInput:checked + .track {
+    background-color: var(--color-primary-hover);
+}
+
+/* Focus-visible */
+.nativeInput:focus-visible + .track {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Disabled state */
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.disabled .track {
+    background-color: var(--color-disabled-bg);
+}
+
+.disabled .nativeInput:checked + .track {
+    background-color: var(--color-disabled);
+}
+
+.disabled .labelText {
+    color: var(--color-disabled);
+}
+
+/* Label text */
+.labelText {
+    font-size: 14px;
+    color: var(--color-text);
+}

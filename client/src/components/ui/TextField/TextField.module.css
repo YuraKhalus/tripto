@@ -1,0 +1,162 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    font-family: var(--font);
+    box-sizing: border-box;
+}
+
+.label {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-dark);
+    line-height: 1.3;
+    user-select: none;
+}
+
+.requiredAsterisk {
+    color: var(--color-error);
+    font-weight: 600;
+}
+
+.inputWrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: border-color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+    box-sizing: border-box;
+}
+
+/* Hover state */
+.inputWrapper:hover:not(.disabled):not(.error):not(.success) {
+    border-color: var(--color-border-hover);
+}
+
+/* Focus-within state */
+.inputWrapper:focus-within:not(.disabled):not(.error):not(.success) {
+    border-color: var(--color-primary);
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Sizes */
+.size_sm {
+    min-height: 36px;
+    padding: 0 10px;
+    gap: 6px;
+    font-size: 13px;
+    border-radius: var(--radius-sm);
+}
+
+.size_md {
+    min-height: 44px;
+    padding: 0 14px;
+    gap: 8px;
+    font-size: 14px;
+    border-radius: var(--radius-md);
+}
+
+.size_lg {
+    min-height: 52px;
+    padding: 0 16px;
+    gap: 10px;
+    font-size: 16px;
+    border-radius: var(--radius-lg);
+}
+
+/* Native input reset */
+.input {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    color: var(--color-text);
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+.input::placeholder {
+    color: var(--color-text-muted);
+    opacity: 0.8;
+}
+
+/* Icons */
+.leftIcon,
+.rightIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+}
+
+/* Error state */
+.error {
+    border-color: var(--color-error);
+    background-color: var(--color-error-soft);
+}
+
+.error:focus-within {
+    border-color: var(--color-error);
+    outline: 2px solid var(--color-error);
+    outline-offset: 2px;
+}
+
+/* Success state */
+.success {
+    border-color: var(--color-success);
+    background-color: var(--color-success-soft);
+}
+
+.success:focus-within {
+    border-color: var(--color-success);
+    outline: 2px solid var(--color-success);
+    outline-offset: 2px;
+}
+
+/* Disabled state */
+.disabled {
+    background-color: var(--color-disabled-bg);
+    border-color: var(--color-border);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.disabled .input {
+    color: var(--color-disabled);
+    cursor: not-allowed;
+}
+
+.disabled .leftIcon,
+.disabled .rightIcon {
+    color: var(--color-disabled);
+}
+
+/* Helper and Error text below input */
+.helperText {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    margin-top: 2px;
+}
+
+.errorText {
+    font-size: 12px;
+    color: var(--color-error);
+    line-height: 1.4;
+    margin-top: 2px;
+}

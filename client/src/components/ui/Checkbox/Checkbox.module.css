@@ -1,0 +1,117 @@
+.container {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: var(--font);
+    box-sizing: border-box;
+}
+
+.labelWrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    line-height: 1.4;
+}
+
+/* Visually hidden native input */
+.nativeInput {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Custom Checkbox Box */
+.customBox {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--color-border);
+    background-color: var(--color-bg);
+    color: var(--color-bg);
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), outline var(--transition-fast);
+    box-sizing: border-box;
+}
+
+.icon {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+/* Hover state */
+.labelWrapper:hover:not(.disabled) .customBox {
+    border-color: var(--color-primary);
+}
+
+/* Checked state */
+.nativeInput:checked + .customBox {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-bg);
+}
+
+.nativeInput:checked + .customBox .icon {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Focus-visible */
+.nativeInput:focus-visible + .customBox {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Error state */
+.boxError {
+    border-color: var(--color-error);
+}
+
+.labelWrapper:hover:not(.disabled) .boxError {
+    border-color: var(--color-error);
+}
+
+/* Disabled state */
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.disabled .customBox {
+    background-color: var(--color-disabled-bg);
+    border-color: var(--color-disabled);
+}
+
+.nativeInput:disabled:checked + .customBox {
+    background-color: var(--color-disabled);
+    border-color: var(--color-disabled);
+    color: var(--color-bg);
+}
+
+/* Label & Error typography */
+.labelText {
+    font-size: 14px;
+    color: var(--color-text);
+}
+
+.disabled .labelText {
+    color: var(--color-disabled);
+}
+
+.errorText {
+    font-size: 12px;
+    color: var(--color-error);
+    margin-left: 30px;
+}

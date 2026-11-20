@@ -1,0 +1,77 @@
+.tablist {
+    display: inline-flex;
+    align-items: center;
+    border-bottom: 1px solid var(--color-border);
+    gap: 8px;
+    font-family: var(--font);
+    box-sizing: border-box;
+    width: auto;
+}
+
+.fullWidth {
+    display: flex;
+    width: 100%;
+}
+
+.tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    user-select: none;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+.tabFullWidth {
+    flex: 1;
+}
+
+/* Hover state */
+.tab:hover:not(.disabled):not(.active) {
+    color: var(--color-primary-hover);
+    border-bottom-color: var(--color-border-hover);
+}
+
+/* Active / Selected state */
+.active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* Focus-visible */
+.tab:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+/* Disabled state */
+.disabled {
+    color: var(--color-disabled);
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+}
+
+.label {
+    line-height: 1.4;
+}

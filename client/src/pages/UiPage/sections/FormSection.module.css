@@ -1,0 +1,280 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 32px 0;
+    font-family: var(--font);
+    color: var(--color-text);
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 16px;
+}
+
+.sectionTitle {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--color-dark);
+}
+
+.sectionSubtitle {
+    font-size: 15px;
+    color: var(--color-text-muted);
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    box-sizing: border-box;
+}
+
+.formikCard {
+    background-color: var(--color-bg-soft);
+    border-color: var(--color-primary-soft);
+}
+
+.cardTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-dark);
+    margin: 0;
+}
+
+.cardDesc {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.subTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-dark);
+    margin: 0;
+}
+
+/* Grids */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.gridItem {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.stateBadge {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-primary);
+    background-color: var(--color-primary-soft);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+}
+
+/* Interactive elements inside showcase */
+.iconButton {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    border-radius: var(--radius-sm);
+    transition: color var(--transition-fast);
+}
+
+.iconButton:hover {
+    color: var(--color-primary);
+}
+
+.iconButton:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.sizesRow {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border);
+}
+
+.sizesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    align-items: center;
+}
+
+/* Radio groups */
+.radioGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.radioInline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Toggles */
+.togglesList {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Tabs wrapper */
+.tabsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.tabContent {
+    margin-top: 12px;
+    padding: 12px 16px;
+    background-color: var(--color-bg-soft);
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    color: var(--color-text);
+}
+
+/* Formik mini-form */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 640px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.formFieldGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.groupLabel {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-dark);
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.submitBtn {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.submitBtn:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.submitBtn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.resetBtn {
+    background-color: transparent;
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.resetBtn:hover {
+    border-color: var(--color-text-muted);
+    color: var(--color-text);
+}
+
+.resetBtn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.submitSuccessBox {
+    margin-top: 16px;
+    padding: 16px;
+    background-color: var(--color-success-soft);
+    border: 1px solid var(--color-success-border);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.submitSuccessTitle {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-success);
+}
+
+.jsonPreview {
+    margin: 0;
+    padding: 12px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-family: monospace;
+    font-size: 12px;
+    color: var(--color-text);
+    overflow-x: auto;
+}
