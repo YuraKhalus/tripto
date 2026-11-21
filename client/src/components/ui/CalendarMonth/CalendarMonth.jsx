@@ -1,6 +1,6 @@
 import { DayPicker } from "@daypicker/react";
 import "@daypicker/react/style.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 /** 
  * year, month          — який місяць показати (month: 0–11) 
  * checkIn, checkOut    — 'YYYY-MM-DD' або null 
@@ -8,17 +8,27 @@ import { useState } from "react";
  * onDayClick(dateStr) 
  */
 
-export default function CalendarMonth({year, checkIn, checkOut, minDate}) {
-    const [selected, setSelected] = useState();
+export default function CalendarMonth({year = new Date().getFullYear(), month = new Date().getMonth(), checkIn = null, checkOut = null, minDate = new Date()}) {
+    const [selected, setSelected] = useState({
+    from: checkIn,
+    to: checkOut
+  });
+
     return (
-    <DayPicker
+    <DayPicker 
+      startMonth={minDate}
+      defaultMonth={new Date(year, month)}
+      disabled={{before: minDate}} 
+      navLayout="around"
       animate
-      mode="single"
+      mode="range"
       selected={selected}
       onSelect={setSelected}
-      footer={
-        selected ? `Selected: ${selected.toLocaleDateString()}` : "Pick a day."
-      }
+      formatters={{
+        formatWeekdayName: (date) =>
+            ["M", "T", "W", "T", "F", "S", "S"][date.getDay()]
+        }}
+
     />
   );
 }
