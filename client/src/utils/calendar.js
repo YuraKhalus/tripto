@@ -37,3 +37,11 @@ export function toISODate(date) {
     let dateISO = date.toISOString()
     return dateISO.slice(0,10)
 }
+
+export function fromISODate(str) {
+    const year = str.slice(0, 4)
+    const month = str.slice(5,7) - 1
+    const day = str.slice(9,11)
+
+    return new Date(year, month, day)
+}
