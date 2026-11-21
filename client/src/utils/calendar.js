@@ -31,3 +31,9 @@ export function getMonthGrid(year, month) {
 
     console.log(weeksArray)
 }
+
+
+export function toISODate(date) {
+    let dateISO = date.toISOString()
+    return dateISO.slice(0,10)
+}
