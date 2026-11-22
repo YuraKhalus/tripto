@@ -47,5 +47,20 @@ services:
         condition: service_healthy
     command: npm run dev
 
+
+    # ---------- Клієнт (Vite + React) ----------
+  client:
+    build: ./client
+    container_name: tripto-client
+    restart: unless-stopped
+    ports:
+      - "${CLIENT_PORT:-5173}:5173"
+    volumes: 
+      - ./client:/app
+      - /app/node_modules
+    depends_on:
+      - api
+    command: npm run dev
+
 volumes:
   pgdata:
