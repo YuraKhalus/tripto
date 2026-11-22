@@ -15,12 +15,12 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-tripto}
     ports:
       # "порт_на_твоєму_компі:порт_у_контейнері"
-      - "${DB_PORT:-5432}:5432"
+      - '${DB_PORT:-5432}:5432'
     volumes:
       # Дані бази переживають перезапуск і видалення контейнера
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-tripto} -d ${POSTGRES_DB:-tripto}"]
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-tripto} -d ${POSTGRES_DB:-tripto}']
       interval: 3s
       timeout: 3s
       retries: 10
@@ -36,7 +36,7 @@ services:
       # Усередині мережі Docker хост бази називається "db", а не "localhost"
       DATABASE_URL: postgresql://${POSTGRES_USER:-tripto}:${POSTGRES_PASSWORD:-tripto}@db:5432/${POSTGRES_DB:-tripto}
     ports:
-      - "${API_PORT:-3000}:3000"
+      - '${API_PORT:-3000}:3000'
     volumes:
       # Твій код монтується в контейнер, тож зміни видно одразу
       - ./server:/app

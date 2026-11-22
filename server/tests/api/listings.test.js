@@ -26,7 +26,7 @@ const fakeListing = {
   price: '120.00', // Prisma Decimal у JSON — рядок
   rating: 4.8,
   reviewsCount: 57,
-  latitude: 41.40,
+  latitude: 41.4,
   longitude: 2.15,
 };
 

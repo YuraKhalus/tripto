@@ -1,0 +1,9 @@
+# Markdown не форматуємо: Prettier вирівнює таблиці пробілами, і кожен новий рядок
+# у таблиці API.md змінював би всю таблицю — конфлікти в PR кожного учня
+*.md
+
+# Згенероване або чужі дані — не наш код
+package-lock.json
+server/prisma/data/
+server/prisma/migrations/
+node_modules/
