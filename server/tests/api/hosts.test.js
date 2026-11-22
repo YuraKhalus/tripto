@@ -12,17 +12,16 @@ vi.mock('../../src/db.js', () => ({
 const { prisma } = await import('../../src/db.js');
 const { app } = await import('../../src/app.js');
 
-const fakeHost = {
-  id: 7,
-  airbnbId: '12345678',
-  name: 'Marta',
-  pictureUrl: 'https://example.com/host.jpg',
-  isSuperhost: true,
-  since: new Date('2020-05-15'),
-  _count: {
-    listings: 5,
-  },
-};
+  const fakeHost = {
+    id: 7,
+    name: 'Marta',
+    pictureUrl: 'https://example.com/host.jpg',
+    isSuperhost: true,
+    since: new Date('2020-05-15'),
+    _count: {
+      listings: 5,
+    },
+  };
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -37,7 +36,6 @@ describe('GET /api/hosts/:id', () => {
     expect(res.status).toBe(200);
     expect(res.body.data).toEqual({
       id: 7,
-      airbnbId: '12345678',
       name: 'Marta',
       pictureUrl: 'https://example.com/host.jpg',
       isSuperhost: true,
@@ -65,27 +63,14 @@ describe('GET /api/hosts/:id', () => {
     expect(res.body).toEqual({ error: 'Host not found' });
   });
 
-  it('повертає 400 на нечисловий id і навіть не йде в базу', async () => {
-    const res = await request(app).get('/api/hosts/abc');
+  it.each(['abc', '-1', '0', '2.5'])(
+    'повертає 400 на id=%s і не йде в базу',
+    async (id) => {
+      const res = await request(app).get(`/api/hosts/${id}`);
 
-    expect(res.status).toBe(400);
-    expect(res.body).toEqual({ error: 'Invalid host id' });
-    expect(prisma.host.findUnique).not.toHaveBeenCalled();
-  });
-
-  it('повертає 400 на від\'ємний id і навіть не йде в базу', async () => {
-    const res = await request(app).get('/api/hosts/-1');
-
-    expect(res.status).toBe(400);
-    expect(res.body).toEqual({ error: 'Invalid host id' });
-    expect(prisma.host.findUnique).not.toHaveBeenCalled();
-  });
-
-  it('повертає 400 на нульовий id і навіть не йде в базу', async () => {
-    const res = await request(app).get('/api/hosts/0');
-
-    expect(res.status).toBe(400);
-    expect(res.body).toEqual({ error: 'Invalid host id' });
-    expect(prisma.host.findUnique).not.toHaveBeenCalled();
-  });
+      expect(res.status).toBe(400);
+      expect(res.body).toEqual({ error: 'Invalid host id' });
+      expect(prisma.host.findUnique).not.toHaveBeenCalled();
+    }
+  );
 });

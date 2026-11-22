@@ -248,29 +248,13 @@ components:
           nullable: true
 
     HostDetails:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 7
-        airbnbId:
-          type: string
-          example: "12345678"
-        name:
-          type: string
-          example: Marta
-        pictureUrl:
-          type: string
-          nullable: true
-        isSuperhost:
-          type: boolean
-        since:
-          type: string
-          format: date
-          nullable: true
-        listingsCount:
-          type: integer
-          example: 5
+      allOf:
+        - $ref: '#/components/schemas/Host'
+        - type: object
+          properties:
+            listingsCount:
+              type: integer
+              example: 5
 
     # Повна картка = коротка картка + додаткові поля (allOf «склеює» схеми)
     ListingDetails:
