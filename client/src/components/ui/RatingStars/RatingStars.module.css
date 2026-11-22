@@ -1,1 +1,13 @@
+.stars{
+    display: flex;
+    gap: 2px;
+}
 
+.stars-0 svg:nth-last-child(-n + 5) path,
+.stars-1 svg:nth-last-child(-n + 4) path,
+.stars-2 svg:nth-last-child(-n + 3) path,
+.stars-3 svg:nth-last-child(-n + 2) path,
+.stars-4 svg:nth-last-child(-n + 1) path {
+    fill: transparent;
+    stroke: #FAC91E;
+}
