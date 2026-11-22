@@ -1,0 +1,24 @@
+.button {
+    border-radius: 100%;
+    background-color: var(--color-bg);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 2s;
+}
+
+.button path{
+    transition: all 0.5s;
+}
+
+.button:hover path{
+    stroke: #FF3B3B;
+}
+
+.active path{
+    fill: #FF3B3B;
+    stroke: #00000000;
+}

@@ -1,3 +1,7 @@
+import ButtonLike from '../../components/ui//ButtonLike/ButtonLike'
+
+
 export function UiPage() {
-    return <p> Сторінка UI </p>
+    return <ButtonLike active={false}/>
+
 }

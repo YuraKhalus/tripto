@@ -1,0 +1,54 @@
+.guestRatingBadge {
+    display: flex;
+    gap: 6px;
+}
+
+.ratingLabel {
+    color: var(--color-primary-800);
+    font-size: 14px;
+    font-family: var(--font);
+    font-weight: 500;
+    line-height: 22px;
+}
+
+.reviewText {
+    color: var(--color-neutral-300);
+    font-size: 12px;
+    font-family: var(--font);
+    font-weight: 500;
+    line-height: 16px;
+}
+
+.rating {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-neutral-50);
+    color: var(--color-primary-800);
+    font-family: var(--font);
+    font-weight: 500;
+    line-height: 24px;
+    border-radius: 50%;
+    border-top-left-radius: 0;
+}
+
+.excellent {
+    color: var(--color-primary-600);
+}
+
+.reviews {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.guestRatingBadgeInline{
+    flex-direction: row-reverse;
+}
+
+.guestRatingBadgeInline .rating {
+    border-radius: 50%;
+    border-top-right-radius: 0;
+}

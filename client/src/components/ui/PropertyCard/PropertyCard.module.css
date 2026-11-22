@@ -1,0 +1,113 @@
+
+.card{
+    display: flex;
+    padding: 16px;
+    border: 1px solid #DDDFE3;
+    border-radius: 16px;
+    row-gap: 8px;
+    column-gap: 16px;
+}
+
+.card__img{
+    position: relative;
+}
+.card__img button {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+}
+
+.location-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+.location{
+    color: #656f81;
+    font-size: 14px;
+    font-family: "Inter",sans-serif;
+    font-weight: 500;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+}
+.location:not(:last-child)::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background-color: #B5BAC2;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 8px;
+}
+.place{
+    color: #0057ff;
+}
+.icon-place::before{
+    content: '';
+    background: url(../assets/location.svg) no-repeat;
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+}
+.icon-metro::before{
+    content: '';
+    background: url(../assets/metro.svg) no-repeat;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+}
+.icon-beach::before{
+    content: '';
+    background: url(../assets/beach.svg) no-repeat;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+}
+
+.property-info{
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+.property{
+    color: #1f2226;
+    font-family: "Roboto",sans-serif;
+    font-weight: 400;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+}
+.property:first-child{
+    font-weight: 500;
+}
+
+.property:not(:last-child)::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background-color: #B5BAC2;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 8px;
+}
+.property:first-child::after{
+    height: 100%;
+    width: 1px;
+    border-radius: 0;
+}
+.chips{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.chip{
+    color: #383e48;
+    font-size: 14px;
+    font-family: "Roboto",sans-serif;
+    line-height: 22px;
+    padding: 5px 16px;
+    border: 1px solid #dddfe3;
+    border-radius: 24px;
+}
