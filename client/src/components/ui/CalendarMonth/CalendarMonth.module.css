@@ -7,6 +7,54 @@
     font-size: var();
 }
 
+.month_grid {
+    margin: var(--space-8) var(--space-8) 0px var(--space-8);
+}
+    
+
+
+.month_caption {
+    position: relative;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-8);
+    margin: var(--space-8) var(--space-8) var(--space-8) var(--space-8);
+}
+.month_caption span{
+   padding: var(--space-8);
+   font-size: var(--fs-16);
+   color: var(--color-neutral-900);
+   font-weight: var(--fw-medium);
+   text-align: center;
+   z-index: 0;
+}
+
+.button_previous[aria-disabled="true"] {
+    cursor: auto;
+    opacity: 50%;
+}
+
+.button_previous{
+    left: 16px;
+    top:18px;
+    position: absolute;
+    background: none;
+    border:none;
+    cursor: pointer;
+    z-index: 1;
+} 
+.button_next{
+    right: 16px;
+    top:18px;
+    position: absolute;
+    background: none;
+    border:none;
+    cursor: pointer;
+    z-index: 1;
+}
+
 .weekday {
     height: 48px;
     font-size: var(--fs-12);
@@ -19,8 +67,6 @@
     margin: 0;
 
 }
-
-
 
 .day_button {
     height: 48px;
