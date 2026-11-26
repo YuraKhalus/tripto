@@ -33,7 +33,7 @@ export default function CalendarMonth({year = new Date().getFullYear(), month = 
         }}
 
       components={{
-        MonthCaption: ({ calendarMonth, ...props }) => {
+        MonthCaption: ({ calendarMonth, displayIndex, ...props }) => {
           const date = calendarMonth.date;
           const monthName = date.toLocaleString("en-US", { month: "long" });
           const yearNumber = date.getFullYear();
