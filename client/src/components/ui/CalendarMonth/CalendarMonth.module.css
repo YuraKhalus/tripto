@@ -1,4 +1,19 @@
-.chevron {
-    color: black;
-    border-radius: 50%;
+.caption_label {
+    color: var(--color-neutral-900);
+    align-content: center;
+}
+
+.md {
+
+}
+
+.rotate{
+    transform: rotate(90);
+}
+.day {
+    border-radius: var(--radius-4);
+}
+.range_end {
+    border-radius: var(--radius-4);
+    background-color: var(--color-primary-50);
 }
