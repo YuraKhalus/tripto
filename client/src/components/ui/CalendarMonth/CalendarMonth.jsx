@@ -1,6 +1,7 @@
 import { DayPicker } from "@daypicker/react";
 import "@daypicker/react/style.css";
 import styles from "./CalendarMonth.module.css"
+import compactStyles from "./CalendarMonthCompact.module.css";
 import { useState } from "react";
 import ChevronRight from "../../icons/ChevronRight";
 
@@ -11,11 +12,22 @@ import ChevronRight from "../../icons/ChevronRight";
  * onDayClick(dateStr) 
  */
 
-export default function CalendarMonth({year = new Date().getFullYear(), month = new Date().getMonth(), checkIn = null, checkOut = null, minDate = new Date()}) {
+export default function CalendarMonth({
+  year = new Date().getFullYear(), 
+  month = new Date().getMonth(),
+  checkIn = null,
+  checkOut = null,
+  minDate = new Date(),
+  size = 'md'  
+}) {
+      
     const [selected, setSelected] = useState({
-    from: checkIn,
-    to: checkOut
-  });
+      from: checkIn,
+      to: checkOut
+    })
+
+    const currentStyles = size === "sm" ? compactStyles : styles;
+  ;
 
     return (<>
     <DayPicker 
@@ -67,7 +79,7 @@ export default function CalendarMonth({year = new Date().getFullYear(), month = 
         },
       }}
 
-      classNames={styles}
+      classNames={currentStyles}
     />
 
         </>

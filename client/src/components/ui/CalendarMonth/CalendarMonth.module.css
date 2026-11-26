@@ -3,17 +3,10 @@
     align-content: center;
 }
 
-.md {
-    font-size: var();
-}
 
 .month{
     background-color: white;
     border-radius: var(--radius-24);
-}
-
-.month_grid {
-    margin: var(--space-8) var(--space-8) 0px var(--space-8);
 }
 
 .month_caption {
@@ -58,19 +51,22 @@
     z-index: 1;
 }
 
+
+
 .weekday {
-    height: 48px;
+    height: 40px;
     font-size: var(--fs-12);
 }
 
 .month_grid {
-  margin: var(--space-8) var(--space-8) 0px var(--space-8);
+  margin: -8px var(--space-8) -8px var(--space-8);
   border-spacing: 0 8px;
 }
 
+
 .day {
 
-    font: var(--fs-16);
+    font-size: var(--fs-16);
     padding: 0;
 }
 
@@ -92,9 +88,7 @@
 .day[data-today="true"].day[data-selected="true"] {
     color: white;
 }
-.day[data-outside="true"] > .day_button {
-    visibility: hidden
-}
+
 .day[data-disabled="true"] > * {
     border: none;
     opacity: 50%;
@@ -103,6 +97,10 @@
 
 .selected {
     background-color: var(--color-primary-50);
+}
+
+.day[data-outside="true"] {
+    visibility: hidden
 }
 
 .range_start {

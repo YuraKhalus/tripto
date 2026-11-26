@@ -1,0 +1,119 @@
+.caption_label {
+    color: var(--color-neutral-900);
+    align-content: center;
+}
+
+
+.month{
+    background-color: white;
+    border-radius: var(--radius-24);
+}
+
+.month_caption {
+    position: relative;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-8);
+    margin: var(--space-8) var(--space-8) var(--space-8) var(--space-8);
+}
+.month_caption span{
+   padding: var(--space-8);
+   font-size: var(--fs-14);
+   color: var(--color-neutral-900);
+   font-weight: var(--fw-medium);
+   text-align: center;
+   z-index: 0;
+}
+
+.button_previous[aria-disabled="true"] {
+    cursor: auto;
+    opacity: 50%;
+}
+
+.button_previous{
+    left: 16px;
+    top:18px;
+    position: absolute;
+    background: none;
+    border:none;
+    cursor: pointer;
+    z-index: 1;
+} 
+.button_next{
+    right: 16px;
+    top:18px;
+    position: absolute;
+    background: none;
+    border:none;
+    cursor: pointer;
+    z-index: 1;
+}
+
+
+
+.weekday {
+    height: 27px;
+    font-size: var(--fs-10);
+}
+
+.month_grid {
+  margin: -6px var(--space-8) -6px var(--space-8);
+  border-spacing: 0 6px;
+}
+
+
+.day {
+
+    font-size: var(--fs-14);
+    padding: 0;
+}
+
+.day_button {
+    height: 40px;
+    width: 40px;
+    padding: 8px;
+    background: none;
+    border: none;
+}
+
+.day_button:hover {
+   border: 1px solid var(--color-neutral-900);
+}
+
+.day[data-today="true"] {
+    color: var(--color-primary-600);
+}
+.day[data-today="true"].day[data-selected="true"] {
+    color: white;
+}
+
+.day[data-disabled="true"] > * {
+    border: none;
+    opacity: 50%;
+}
+
+
+.selected {
+    background-color: var(--color-primary-50);
+}
+
+.day[data-outside="true"] {
+    visibility: hidden
+}
+
+.range_start {
+    background-color: var(--color-primary-500);
+    border-top-left-radius: var(--radius-4);
+    border-bottom-left-radius: var(--radius-4);
+    color: white;
+}
+
+.range_end {
+    background-color: var(--color-primary-500);
+    border-top-right-radius: var(--radius-4);
+    border-bottom-right-radius: var(--radius-4);
+    color: white;
+}
+
