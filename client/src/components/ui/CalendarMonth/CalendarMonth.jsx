@@ -19,6 +19,8 @@ export default function CalendarMonth({year = new Date().getFullYear(), month = 
 
     return (<>
     <DayPicker 
+      fixedWeeks
+      showOutsideDays
       startMonth={minDate}
       defaultMonth={new Date(year, month)}
       disabled={{before: minDate}} 
