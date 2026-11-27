@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Heart from "../../layout/icons/Heart";
+import Heart from "../../icons/Heart";
 import styles from './ButtonLike.module.css'
 
 export default function ButtonLike(props) {

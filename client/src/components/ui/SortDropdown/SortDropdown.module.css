@@ -1,0 +1,73 @@
+.dropdown{
+    position: relative;
+}
+.dropdown-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border-radius: 12px;
+    border: 1px solid #b5bac2;
+    background-color: #00000000;
+    padding: 8px 16px;
+    color: #383e48;
+    font-family: "Inter",sans-serif;
+    font-weight: 500;
+    z-index: 10;
+    transition: all 0.5s;
+}
+
+.dropdown-menu{
+    position: absolute;
+    top: -999px;
+    opacity: 0;
+    z-index: 1;
+    border-radius: 12px;
+    background-color: #ffffff;
+    padding-right: 30px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 
+                0 2px 6px rgba(0, 0, 0, 0.04);
+    transition: all 0.8s;
+}
+
+.dropdown-item {
+    padding: 14px 20px;
+    color: #2b2b2b;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.5s;
+}
+
+.dropdown-item:hover{
+    color: #3540be;
+}
+
+.disable {
+    top: 50px;
+    opacity: 1;
+}
+
+.active__button{
+    border: 1px solid #000000;
+    color: #000000;
+}
+
+.active__button svg{
+    transform: rotate(180deg);
+}
+
+.active__select{
+    color: #4A58E9;
+}
+
+.active__select::after{
+    content: '';
+    background: url(../../../assets/check.svg);
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    right: -15px;
+    transform: translateY(-50%);
+}
