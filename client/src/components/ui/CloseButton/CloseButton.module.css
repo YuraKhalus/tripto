@@ -1,0 +1,40 @@
+.close-btn {
+  --svg-size: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-neutral-300);
+  width: var(--btn-size);
+  height: var(--btn-size);
+  border-radius: var(--radius-full);
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.close-btn svg {
+  display: block;
+  flex-shrink: 0;
+  width: var(--svg-size);
+  height: var(--svg-size);
+}
+
+.sm {
+  --btn-size: 20px;
+  --svg-size: 16px;
+}
+.md {
+  --btn-size: 24px;
+}
+.lg {
+  --btn-size: 32px;
+}
+
+.close-btn:hover {
+  background: var(--color-neutral-50);
+  color: var(--color-neutral-400);
+}

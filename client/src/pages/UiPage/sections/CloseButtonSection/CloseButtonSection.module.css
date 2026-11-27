@@ -1,0 +1,27 @@
+.showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  column-gap: 48px;
+  background: var(--color-neutral-100);
+  width: fit-content;
+  padding: 10px 20px;
+  border-radius: var(--radius-8);
+}
+
+.column {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 20px;
+}
+
+.hover button {
+  background: var(--color-neutral-50);
+  color: var(--color-neutral-400);
+}
