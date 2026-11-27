@@ -114,11 +114,10 @@
 {
   "data": {
     "id": 7,
-    "airbnbId": "12345678",
     "name": "Marta",
     "pictureUrl": "https://example.com/host.jpg",
     "isSuperhost": true,
-    "since": "2020-05-15",
+    "since": "2020-05-15T00:00:00.000Z",
     "listingsCount": 5
   }
 }
