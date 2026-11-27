@@ -1,43 +1,43 @@
-.badge{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4px 12px;
-    font-weight: var(--fw-medium);
-    color: var(--color-badge-white);
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  font-weight: var(--fw-medium);
+  color: var(--color-badge-white);
 }
 
-.sharp{
-    border-radius: 12px 0;
+.sharp {
+  border-radius: 12px 0;
 }
-.round{
-    border-radius: 16px;
-}
-
-.purple{
-    background: var(--color-badge-purple);
-}
-.blue{
-    background: var(--color-primary-100);
-    color: var(--color-primary-700);
-    border: 1px solid var(--color-primary-700);
-}
-.navy{
-    background: var(--color-primary-700);
-}
-.green{
-    background: var(--color-badge-green);
-}
-.yellow{
-    background: var(--color-badge-amber);
-    color: var(--color-neutral-900);
+.round {
+  border-radius: 16px;
 }
 
-.sm{
-    font-size: var(--fs-12);
-    line-height: var(--lh-caption);
+.purple {
+  background: var(--color-badge-purple);
 }
-.md{
-    font-size: var(--fs-14);
-    line-height: var(--lh-body);
+.blue {
+  background: var(--color-primary-100);
+  color: var(--color-primary-700);
+  border: 1px solid var(--color-primary-700);
+}
+.navy {
+  background: var(--color-primary-700);
+}
+.green {
+  background: var(--color-badge-green);
+}
+.yellow {
+  background: var(--color-badge-amber);
+  color: var(--color-neutral-900);
+}
+
+.sm {
+  font-size: var(--fs-12);
+  line-height: var(--lh-caption);
+}
+.md {
+  font-size: var(--fs-14);
+  line-height: var(--lh-body);
 }

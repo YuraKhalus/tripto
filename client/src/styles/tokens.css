@@ -66,12 +66,11 @@
   --color-bg-soft: var(--color-primary-50);
   --color-bg-disabled: var(--color-neutral-50);
 
-   /* Badge — декоративні кольори для бейджів */
-   --color-badge-white: #ffffff;
-   --color-badge-green: #049153;
-   --color-badge-amber: #fac91e;
-   --color-badge-purple: #9e20f8;
-  
+  /* Badge — декоративні кольори для бейджів */
+  --color-badge-white: #ffffff;
+  --color-badge-green: #049153;
+  --color-badge-amber: #fac91e;
+  --color-badge-purple: #9e20f8;
 
   /* ---------- Типографіка ----------
      У Figma ~30 текстових стилів, але унікальних розмірів лише 14, тому токени —
