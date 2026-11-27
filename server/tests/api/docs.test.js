@@ -19,6 +19,7 @@ describe('Документація API', () => {
       '/listings/{id}',
       '/listings/{id}/reviews',
       '/hosts/{id}',
+      '/hosts/{id}/listings',
     ]);
   });
 

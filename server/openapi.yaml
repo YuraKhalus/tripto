@@ -131,6 +131,37 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  /hosts/{id}/listings:
+    get:
+      summary: Отримати списки оголошень конкретного хоста
+      tags:
+        - hosts
+      parameters:
+        - $ref: '#/components/parameters/HostId'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Успішна відповідь зі списком оголошень та пагінацією
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListingCard'
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
 # Спільні шматки, на які посилаємось через $ref, щоб не повторювати їх у кожному ендпоінті
 components:
   parameters:
