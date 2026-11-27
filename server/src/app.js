@@ -19,6 +19,7 @@ app.get('/api/health', (req, res) => {
 });
 
 app.use('/api/listings', listingsRouter);
+app.use('/api/hosts', hostsRouter);
 
 app.use('/api/hosts', hostsRouter);
 
