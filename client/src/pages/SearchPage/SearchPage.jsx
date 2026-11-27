@@ -1,3 +1,3 @@
 export function SearchPage() {
-    return <p> Сторінка пошуку </p>
+  return <p> Сторінка пошуку </p>;
 }
