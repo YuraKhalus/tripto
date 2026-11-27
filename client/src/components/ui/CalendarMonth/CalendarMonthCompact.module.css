@@ -5,6 +5,7 @@
 
 
 .month{
+    overflow: hidden;
     background-color: white;
     border-radius: var(--radius-24);
 }
