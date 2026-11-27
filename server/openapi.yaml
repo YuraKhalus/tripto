@@ -201,16 +201,6 @@ components:
         minimum: 1
         example: 7
 
-    HostId:
-      name: id
-      in: path
-      required: true
-      description: Внутрішній id хоста
-      schema:
-        type: integer
-        minimum: 1
-        example: 1
-
   responses:
     BadRequest:
       description: Невалідні вхідні дані
