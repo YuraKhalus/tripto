@@ -3,6 +3,7 @@ import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yaml';
 import { listingsRouter } from './routes/listings.js';
+import { hostsRouter } from './routes/hosts.js';
 
 // Контракт API лежить у server/openapi.yaml. Читаємо його один раз під час старту
 const openapi = YAML.parse(readFileSync(new URL('../openapi.yaml', import.meta.url), 'utf8'));
@@ -18,6 +19,7 @@ app.get('/api/health', (req, res) => {
 });
 
 app.use('/api/listings', listingsRouter);
+app.use('/api/hosts', hostsRouter);
 
 // Документація: сирий контракт (для Postman, генераторів клієнта) і Swagger UI для людей.
 // Підключаємо ДО обробника 404, інакше він перехопить ці адреси

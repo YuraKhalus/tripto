@@ -143,6 +143,56 @@
 }
 ```
 
+### `GET /hosts/:id`
+Картка господаря.
+Помилки: `400` якщо `id` не ціле додатне число, `404` якщо господаря немає.
+
+```json
+{
+  "data": {
+    "id": 7,
+    "name": "Marta",
+    "pictureUrl": "https://example.com/host.jpg",
+    "isSuperhost": true,
+    "since": "2020-05-15T00:00:00.000Z",
+    "listingsCount": 5
+  }
+}
+```
+
+### `GET /hosts/:id/listings`
+
+Усі житла господаря з пагінацією, у тому самому форматі карток, що й `/listings`.
+Помилки: `400`, `{ "error": "Invalid host id" }`, якщо `id` не ціле додатне число, `404`, `{ "error": "Host not found" }`, якщо господаря немає.
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Cozy apartaments Plaza España, 3 bedrooms",
+      "pictureUrl": "https://a0.muscache.com/pictures/miso/Hosting-846093318788581404/original/d5cf8e54-a36d-4d1f-9240-d858df276b3c.jpeg",
+      "neighbourhood": "la Nova Esquerra de l'Eixample",
+      "roomType": "Entire home/apt",
+      "accommodates": 5,
+      "price": 335,
+      "rating": 4.73,
+      "reviewsCount": 3111,
+      "location": {
+        "lat": 41.37953,
+        "lng": 2.1466
+      }
+    }
+  ],
+  "meta": {
+    "page": 1,
+    "limit": 20,
+    "total": 5,
+    "totalPages": 1
+  }
+}
+```
+
 ---
 
 ## Далі (кожен описує свій модуль)

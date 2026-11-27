@@ -13,7 +13,15 @@ describe('Документація API', () => {
     expect(res.status).toBe(200);
     expect(res.body.openapi).toMatch(/^3\./);
     // Додав ендпоінт у код, а в контракт забув — цей тест нагадає
-    expect(Object.keys(res.body.paths)).toEqual(['/health', '/listings', '/listings/top-rated', '/listings/{id}']);
+    expect(Object.keys(res.body.paths)).toEqual([
+      '/health',
+      '/listings',
+      '/listings/top-rated',
+      '/listings/{id}',
+      '/listings/{id}/reviews',
+      '/hosts/{id}',
+      '/hosts/{id}/listings',
+    ]);
   });
 
   it('GET /api/docs/ віддає сторінку Swagger UI', async () => {

@@ -2,24 +2,10 @@ import { Router } from 'express';
 import { prisma } from '../db.js';
 import { parsePagination, buildMeta } from '../utils/pagination.js';
 import { parseLimit } from '../utils/limit.js';
-import { toListingCard, toListingDetails } from '../mappers/listing.js';
+import { cardSelect, toListingCard, toListingDetails } from '../mappers/listing.js';
+import { toReview } from '../mappers/review.js';
 
 export const listingsRouter = Router();
-
-// Поля, потрібні для картки. Беремо лише їх, а не весь рядок (опис може бути довгим)
-const cardSelect = {
-  id: true,
-  name: true,
-  pictureUrl: true,
-  neighbourhood: true,
-  roomType: true,
-  accommodates: true,
-  price: true,
-  rating: true,
-  reviewsCount: true,
-  latitude: true,
-  longitude: true,
-};
 
 // GET /api/listings?page=1&limit=20
 listingsRouter.get('/', async (req, res) => {
@@ -27,11 +13,19 @@ listingsRouter.get('/', async (req, res) => {
 
   // Два запити паралельно: сторінка даних + загальна кількість
   const [listings, total] = await Promise.all([
-    prisma.listing.findMany({ select: cardSelect, orderBy: { id: 'asc' }, skip, take }),
+    prisma.listing.findMany({
+      select: cardSelect,
+      orderBy: { id: 'asc' },
+      skip,
+      take,
+    }),
     prisma.listing.count(),
   ]);
 
-  res.json({ data: listings.map(toListingCard), meta: buildMeta({ page, limit, total }) });
+  res.json({
+    data: listings.map(toListingCard),
+    meta: buildMeta({ page, limit, total }),
+  });
 });
 
 // GET /api/listings/top-rated?limit=10
@@ -73,3 +67,28 @@ listingsRouter.get('/:id', async (req, res) => {
   res.json({ data: toListingDetails(listing) });
 });
 
+
+listingsRouter.get('/:id/reviews', async (req, res) => {
+  const id = Number(req.params.id);
+  if(!Number.isInteger(id) || id < 1){
+    return res.status(400).json({ error: 'Invalid listing id'});
+  }
+
+  const listing = await prisma.listing.findUnique({ where: { id }, select: { id: true } });
+
+  if(listing === null) {
+    return res.status(404).json({ error: 'Listing not found' });
+  }
+
+  const { page, limit, skip, take } = parsePagination(req.query);
+  const [reviews, total] = await Promise.all([
+    prisma.review.findMany({
+      where: { listingId: id },
+      orderBy: [{ date: 'desc'}, { id: 'desc' }],
+      skip, take
+    }),
+    prisma.review.count({ where: { listingId: id }})
+  ])
+
+  res.json({ data: reviews.map(toReview), meta: buildMeta({ page, limit, total }) });
+})

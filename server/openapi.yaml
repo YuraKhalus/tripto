@@ -19,6 +19,8 @@ tags:
     description: Службові ендпоінти
   - name: listings
     description: Оголошення (житло)
+  - name: hosts
+    description: Господарі
 
 paths:
   /health:
@@ -107,6 +109,86 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+  
+  /listings/{id}/reviews:
+    get:
+      tags: [listings]
+      summary: Відгуки до житла, від найновіших
+      parameters: 
+        - $ref: '#/components/parameters/ListingId'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Сторінка відгуків
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Review'
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        
+
+  /hosts/{id}:
+    get:
+      tags: [hosts]
+      summary: Інформація про господаря з кількістю оголошень
+      parameters:
+        - $ref: '#/components/parameters/HostId'
+      responses:
+        '200':
+          description: Господар знайдено
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/HostDetails'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /hosts/{id}/listings:
+    get:
+      summary: Отримати списки оголошень конкретного хоста
+      tags:
+        - hosts
+      parameters:
+        - $ref: '#/components/parameters/HostId'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Успішна відповідь зі списком оголошень та пагінацією
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ListingCard'
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
 
 # Спільні шматки, на які посилаємось через $ref, щоб не повторювати їх у кожному ендпоінті
 components:
@@ -137,6 +219,15 @@ components:
         type: integer
         minimum: 1
         example: 1
+    HostId:
+      name: id
+      in: path
+      required: true
+      description: Внутрішній id господаря (не airbnbId)
+      schema:
+        type: integer
+        minimum: 1
+        example: 7
 
   responses:
     BadRequest:
@@ -243,6 +334,15 @@ components:
           format: date
           nullable: true
 
+    HostDetails:
+      allOf:
+        - $ref: '#/components/schemas/Host'
+        - type: object
+          properties:
+            listingsCount:
+              type: integer
+              example: 5
+
     # Повна картка = коротка картка + додаткові поля (allOf «склеює» схеми)
     ListingDetails:
       allOf:
@@ -281,3 +381,22 @@ components:
               example: 2
             host:
               $ref: '#/components/schemas/Host'
+
+    Review:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        reviewerName:
+          type: string
+          example: John
+        date:
+          type: string
+          format: date
+          description: Дата відгуку у форматі YYYY-MM-DD. У базі DateTime, мапер повертає лише дату
+          example: '2026-10-20'
+        comments:
+          type: string
+          nullable: true
+          example: Great place!
