@@ -16,6 +16,7 @@ describe('Документація API', () => {
     expect(Object.keys(res.body.paths)).toEqual([
       '/health',
       '/listings',
+      '/listings/top-rated',
       '/listings/{id}',
       '/listings/{id}/reviews',
       '/hosts/{id}',

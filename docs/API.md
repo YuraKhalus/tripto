@@ -94,6 +94,43 @@
 | `GET /hosts/:id/listings` | Максим | «Інше житло господаря» |
 | `GET /neighbourhoods` | Тана | фільтр «Район» на головній |
 
+### `GET /listings/top-rated`
+Найкраще житло для головної: лише з рейтингом і щонайменше 10 відгуками. Сортування: `rating` ↓, `reviewsCount` ↓, `id` ↑. Без пагінації.
+Помилки: `400` `{ "error": "Invalid limit" }`, якщо `limit` не ціле число від 1 до 50.
+
+| Query | Тип | За замовчуванням | Обмеження |
+|-------|-----|------------------|-----------|
+| `limit` | int | 10 | 1–50 |
+
+#### 200
+
+```json
+{
+  "data": [
+    {
+      "id": 118,
+      "name": "Mediterranean Barcelona Apartments, Penthouse A...",
+      "pictureUrl": "https://...",
+      "neighbourhood": "Porta",
+      "roomType": "Entire home/apt",
+      "accommodates": 4,
+      "price": 189,
+      "rating": 5,
+      "reviewsCount": 50,
+      "location": { "lat": 41.4305, "lng": 2.1786 }
+    }
+  ]
+}
+```
+
+#### 400
+
+```json
+{
+  "error": "Invalid limit"
+}
+```
+
 ### `GET /listings/:id/reviews`
 Відгуки до житла, від найновіших (за датою, потім за `id`). Пагінація як у `/listings`.
 Помилки: `400` якщо `id` не ціле додатне число, `404` якщо житла немає.
