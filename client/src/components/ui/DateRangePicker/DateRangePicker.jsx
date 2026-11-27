@@ -1,4 +1,4 @@
-import PlusMinus from "../../icons/PlusMinus";
+import styles from "./DateRangePicker.module.css"
 import CalendarMonth from "../CalendarMonth/CalendarMonth";
 import DateRangePickerButton from "./DateRangePickerButton";
 
@@ -8,24 +8,24 @@ export default function DateRangePicker({value = {checkIn: null, checkOut: null}
         <>
         
         
-            <div className="modal_window_dataRange">
+            <div className={styles.modal_window_dataRange}>
                 <h4 className="dataRange_title">
                     <button className="dataRange_title_button_date">Date</button>
                     <button className="dataRange_title_button_date">Flexible</button>
                 </h4>
 
-            <div className="dataRange_calendars_container">
-                <CalendarMonth checkIn={checkIn} checkOn={checkOut} minDate={minDate}/>
-                <CalendarMonth checkIn={checkIn} checkOn={checkOut} minDate={minDate}/>
-            </div>
+                <div className={styles.dataRange_calendars_container}>
+                    <CalendarMonth size="sm" checkIn={checkIn} checkOn={checkOut} minDate={minDate}/>
+                    <CalendarMonth size="sm" checkIn={checkIn} checkOn={checkOut} minDate={minDate}/>
+                </div>
 
-            <div className="dataRange_changeButtons_container">
-                <DateRangePickerButton text={"Exact Day"}/>
-                <DateRangePickerButton text={"1 Days"} size={16}/>
-                <DateRangePickerButton text={"2 Days"} size={16}/>
-                <DateRangePickerButton text={"3 Days"} size={16}/>
-                <DateRangePickerButton text={"4 Days"} size={16}/>
-            </div>
+                <div className="dataRange_changeButtons_container">
+                    <DateRangePickerButton text={"Exact Day"}/>
+                    <DateRangePickerButton text={"1 Days"} size={16}/>
+                    <DateRangePickerButton text={"2 Days"} size={16}/>
+                    <DateRangePickerButton text={"3 Days"} size={16}/>
+                    <DateRangePickerButton text={"4 Days"} size={16}/>
+                </div>
                 
             </div>
         </>
