@@ -3,12 +3,6 @@
 :root {
   /* ---------- Палітра (назви як у Figma) ---------- */
 
-  /* Badge — декоративні кольори для бейджів */
-  --color-badge-white: #ffffff;
-  --color-badge-green: #049153;
-  --color-badge-amber: #fac91e;
-  --color-badge-purple: #9e20f8;
-
   /* Primary — бренд: кнопки, посилання, акценти. 500 — основний */
   --color-primary-50: #e8effc;
   --color-primary-100: #d1dffa;
