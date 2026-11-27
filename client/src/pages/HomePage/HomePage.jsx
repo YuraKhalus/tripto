@@ -1,3 +1,3 @@
 export function HomePage() {
-    return <p> Головна сторінка </p>
+  return <p> Головна сторінка </p>;
 }

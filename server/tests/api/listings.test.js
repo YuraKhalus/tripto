@@ -41,7 +41,7 @@ const expectedCard = {
   price: 120,
   rating: 4.8,
   reviewsCount: 57,
-  location: { lat: 41.40, lng: 2.15 },
+  location: { lat: 41.4, lng: 2.15 },
 };
 
 const fakeHost = {

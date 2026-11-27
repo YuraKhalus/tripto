@@ -1,3 +1,3 @@
 export function UiPage() {
-    return <p> Сторінка UI </p>
+  return <p> Сторінка UI </p>;
 }

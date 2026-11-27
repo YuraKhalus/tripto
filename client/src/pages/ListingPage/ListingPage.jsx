@@ -1,3 +1,3 @@
 export function ListingPage() {
-    return <p> Сторінка оголошення </p>
+  return <p> Сторінка оголошення </p>;
 }

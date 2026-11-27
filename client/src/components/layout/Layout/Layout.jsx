@@ -4,13 +4,13 @@ import { Footer } from '../Footer/Footer.jsx';
 import styles from './Layout.module.css';
 
 export function Layout() {
-    return (
-        <div className={styles.layout}>
-            <Header />
-            <main className={styles.main}>
-                <Outlet />
-            </main>
-            <Footer />
-        </div>
-    );
+  return (
+    <div className={styles.layout}>
+      <Header />
+      <main className={styles.main}>
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  );
 }

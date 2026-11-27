@@ -31,10 +31,10 @@ listingsRouter.get('/', async (req, res) => {
 // GET /api/listings/top-rated?limit=10
 // Стоїть ВИЩЕ за /:id, інакше Express прийме "top-rated" за id і поверне 400
 listingsRouter.get('/top-rated', async (req, res) => {
-  const limit = parseLimit(req.query.limit, {defaultValue: 10, max: 50});
-  
+  const limit = parseLimit(req.query.limit, { defaultValue: 10, max: 50 });
+
   if (limit === null) {
-    return res.status(400).json({ error: "Invalid limit" })
+    return res.status(400).json({ error: 'Invalid limit' });
   }
 
   const listings = await prisma.listing.findMany({
@@ -44,9 +44,8 @@ listingsRouter.get('/top-rated', async (req, res) => {
     take: limit,
   });
 
-  res.json({ data: listings.map(toListingCard)});
-})
-
+  res.json({ data: listings.map(toListingCard) });
+});
 
 // GET /api/listings/:id
 listingsRouter.get('/:id', async (req, res) => {
@@ -67,16 +66,15 @@ listingsRouter.get('/:id', async (req, res) => {
   res.json({ data: toListingDetails(listing) });
 });
 
-
 listingsRouter.get('/:id/reviews', async (req, res) => {
   const id = Number(req.params.id);
-  if(!Number.isInteger(id) || id < 1){
-    return res.status(400).json({ error: 'Invalid listing id'});
+  if (!Number.isInteger(id) || id < 1) {
+    return res.status(400).json({ error: 'Invalid listing id' });
   }
 
   const listing = await prisma.listing.findUnique({ where: { id }, select: { id: true } });
 
-  if(listing === null) {
+  if (listing === null) {
     return res.status(404).json({ error: 'Listing not found' });
   }
 
@@ -84,11 +82,12 @@ listingsRouter.get('/:id/reviews', async (req, res) => {
   const [reviews, total] = await Promise.all([
     prisma.review.findMany({
       where: { listingId: id },
-      orderBy: [{ date: 'desc'}, { id: 'desc' }],
-      skip, take
+      orderBy: [{ date: 'desc' }, { id: 'desc' }],
+      skip,
+      take,
     }),
-    prisma.review.count({ where: { listingId: id }})
-  ])
+    prisma.review.count({ where: { listingId: id } }),
+  ]);
 
   res.json({ data: reviews.map(toReview), meta: buildMeta({ page, limit, total }) });
-})
+});
